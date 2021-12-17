@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Player {
 	int cardNum = 0;
-	List<Card> currentList = new ArrayList(50);
+	List<Card> playerCardList = new ArrayList<Card>();
 
-	public void getCard() {
-
+	public void getCard(Card card) {
+		playerCardList.add(card);
 	}
 }

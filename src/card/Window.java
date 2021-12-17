@@ -52,6 +52,10 @@ public class Window extends JFrame implements ActionListener {
 //		panel.add(loginButton);
 	}
 
+	public void addCard(Card card) {
+		panel.add(card);
+	}
+
 	// 进行一个牌的移
 	public static void move(Card card, Point from, Point to, int t) {
 		if (to.x != from.x) {
