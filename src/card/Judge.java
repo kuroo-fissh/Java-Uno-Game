@@ -102,9 +102,10 @@ public class Judge {
 	public Card drawCard() {
 		Card card;
 		Random random = new Random();
-		int a = random.nextInt(108);
+		int a = random.nextInt(cardNum);
 		card = judgeCardList.get(a);
 		judgeCardList.remove(a);
+		cardNum--;
 		return card;
 	}
 }

@@ -53,6 +53,7 @@ public class Window extends JFrame implements ActionListener {
 	}
 
 	public void addCard(Card card) {
+		card.setBounds(200, 300, 100, 155);
 		panel.add(card);
 	}
 
