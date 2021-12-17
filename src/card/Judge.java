@@ -11,9 +11,9 @@ public class Judge {
 	public Judge() {
 		Card card;
 
-		// åˆå§‹åŒ–ç‰Œ
+		// ³õÊ¼»¯ÅÆ
 		cardNum = 108;
-		// æ•°å­—ç‰Œ
+		// Êı×ÖÅÆ
 		for (int i = 0; i <= 9; i++) {
 			for (int j = 0; j < 2; j++) {
 				card = new Card("b" + i, false);
@@ -28,7 +28,7 @@ public class Judge {
 				card.setLocation(300 + (2 * 20), 50);
 				judgeCardList.add(card);
 
-				card = new Card("l" + i, false);
+				card = new Card("y" + i, false);
 				card.setLocation(300 + (3 * 20), 50);
 				judgeCardList.add(card);
 				// container.add(card[count]);
@@ -36,7 +36,7 @@ public class Judge {
 					break;
 			}
 		}
-		// æ™®é€šåŠŸèƒ½ç‰Œ
+		// ÆÕÍ¨¹¦ÄÜÅÆ
 		for (int i = 0; i < 2; i++) {
 			card = new Card("bdraw2", false);
 			card.setLocation(300 + (0 * 20), 50);
@@ -86,7 +86,7 @@ public class Judge {
 			card.setLocation(300 + (3 * 20), 50);
 			judgeCardList.add(card);
 		}
-		// é«˜çº§åŠŸèƒ½ç‰Œ
+		// ¸ß¼¶¹¦ÄÜÅÆ
 		for (int i = 0; i < 4; i++) {
 			card = new Card("wild", false);
 			card.setLocation(300 + (i * 20), 50);

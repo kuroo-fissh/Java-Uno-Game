@@ -10,8 +10,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.event.MenuKeyEvent;
+import javax.swing.event.MenuKeyListener;
 
-// 窗口类，负责显示牌局
+// 绐��ｇ被锛�璐�璐ｆ�剧ず��灞�
 public class Window extends JFrame implements ActionListener {
 
 	/**
@@ -19,10 +21,10 @@ public class Window extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel = new JPanel();
-	JMenuItem start, exit, about; // 菜单按钮
+	JMenuItem start, exit, about; // ��������
 
 	public Window() {
-		// 初始化窗口
+		// ��濮���绐���
 		this.setTitle("Uno!");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(930, 620);
@@ -45,24 +47,24 @@ public class Window extends JFrame implements ActionListener {
 		userCard1.setBounds(130, 100, 100, 155);
 		panel.add(userCard1);
 
-//		JButton loginButton = new JButton("一个按钮");
+//		JButton loginButton = new JButton("涓�涓�����");
 //		loginButton.setBounds(0, 100, 100, 25);
 //
 //		// ......
 //		panel.add(loginButton);
 	}
 
-	public void addCard(Card card) {
-		card.setBounds(200, 300, 100, 155);
+	public void addCard(Card card, int tmp) {
+		card.setBounds(200 + tmp * 30, 300, 100, 155);
 		panel.add(card);
 	}
 
-	// 进行一个牌的移
+	// 杩�琛�涓�涓�����绉�
 	public static void move(Card card, Point from, Point to, int t) {
 		if (to.x != from.x) {
 			double k = (1.0) * (to.y - from.y) / (to.x - from.x);
 			double b = to.y - to.x * k;
-			int flag = 0;// 判断向左还是向右移动步幅
+			int flag = 0;// �ゆ����宸�杩������崇Щ�ㄦ�ュ�
 			if (from.x < to.x) {
 				if (t % 3 == 2) {
 					flag = 3;
@@ -77,38 +79,38 @@ public class Window extends JFrame implements ActionListener {
 				}
 			}
 			for (int i = from.x; Math.abs(i - to.x) > 20; i += flag) {
-				double y = k * i + b;// 这里主要用的数学中的线性函数
+				double y = k * i + b;// 杩���涓昏��ㄧ���板��涓���绾挎�у�芥��
 				System.out.println(y + "=" + k + "*" + i + "+" + b);
 				card.setLocation(i, (int) y);
 
 				try {
-					Thread.sleep(20); // 延迟，可自己设置
+					Thread.sleep(20); // 寤惰�锛�����宸辫�剧疆
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		// 位置校准
+		// 浣�缃��″��
 		card.setLocation(to);
 	}
 
-	// 根据牌数重置手牌位置
+	// �规�����伴��缃�����浣�缃�
 	public static void rePosition(List<Card> list, int flag) {
 		Point new_p = new Point();
 		if (flag == 0) {
-			// 玩家0 - 本玩家 - 下
+			// �╁��0 - ���╁�� - 涓�
 			new_p.x = (800 / 2) - (list.size() + 1) * 30 / 2;
 			new_p.y = 450;
 		} else if (flag == 1) {
-			// 玩家1 - 左
+			// �╁��1 - 宸�
 			new_p.x = 50;
 			new_p.y = (450 / 2) - (list.size() + 1) * 15 / 2;
 		} else if (flag == 2) {
-			// 玩家2 - 上
+			// �╁��2 - 涓�
 			new_p.x = (800 / 2) - (list.size() + 1) * 30 / 2;
 			new_p.y = 150;
 		} else if (flag == 3) {
-			// 玩家3 - 右
+			// �╁��3 - ��
 			new_p.x = 700;
 			new_p.y = (450 / 2) - (list.size() + 1) * 15 / 2;
 		}
@@ -124,15 +126,15 @@ public class Window extends JFrame implements ActionListener {
 		}
 	}
 
-	// 创建菜单 功能按钮
+	// ��寤鸿���� ���芥����
 	public void SetMenu() {
 		JMenuBar jMenuBar = new JMenuBar();
-		JMenu game = new JMenu("游戏");
-		JMenu help = new JMenu("帮助");
+		JMenu game = new JMenu("Game");
+		JMenu help = new JMenu("Help");
 
-		start = new JMenuItem("新游戏");
-		exit = new JMenuItem("退出");
-		about = new JMenuItem("关于");
+		start = new JMenuItem("New game");
+		exit = new JMenuItem("Exit");
+		about = new JMenuItem("About");
 
 		start.addActionListener(this);
 		exit.addActionListener(this);
@@ -146,6 +148,43 @@ public class Window extends JFrame implements ActionListener {
 		jMenuBar.add(help);
 		this.setJMenuBar(jMenuBar);
 
+		start.addActionListener(
+			new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println("Start game");
+					Judge judge = new Judge();
+					for(int i = 0; i <= 5; i++)
+					{
+						Card card = judge.drawCard();
+						addCard(card, i);
+						repaint();
+					}
+					
+				}
+			}
+		);
+
+		exit.addActionListener(
+			new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println("Exit");
+				}
+			}
+		);
+
+		about.addActionListener(
+			new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println("About");
+				}
+			}
+		);
 	}
 
 	@Override

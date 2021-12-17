@@ -5,6 +5,7 @@ public class Main {
 		Card card[] = new Card[110];
 		Window window = new Window();
 		Judge judge = new Judge();
-		window.addCard(judge.drawCard());
+		//window.addCard(judge.drawCard());
+		//window.repaint();
 	}
 }

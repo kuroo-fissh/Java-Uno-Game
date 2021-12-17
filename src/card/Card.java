@@ -5,9 +5,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-// å¡ç‰Œç®¡ç†ç±»
+// ¿¨ÅÆ¹ÜÀíÀà
 public class Card extends JLabel implements MouseListener {
 	/**
 	 * 
@@ -41,6 +43,15 @@ public class Card extends JLabel implements MouseListener {
 		this.faceup = false;
 	}
 
+	public void Play()
+	{
+		System.out.println("In play");
+		JPanel panel = new JPanel();
+		JButton button = new JButton("Kono CARD da!");
+		button.setBounds(500,400,100,100);
+		panel.add(button);
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -52,34 +63,35 @@ public class Card extends JLabel implements MouseListener {
 			else {
 				step = 30;
 			}
-
+			System.out.println("Currently click on:" + this.name);
+			Play();
 			clicked = !clicked;
 			Window.move(this, from, new Point(from.x, from.y - step), 10);
 		}
-		System.out.println("é¼ æ ‡ç‚¹å‡»");
+		System.out.println("Êó±êµã»÷");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("é¼ æ ‡æŒ‰ä¸‹");
+		System.out.println("Êó±ê°´ÏÂ");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("é¼ æ ‡æ¾å¼€");
+		System.out.println("Êó±êËÉ¿ª");
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("é¼ æ ‡è¿›å…¥ç»„ä»¶åŒºåŸŸ");
+		System.out.println("Êó±ê½øÈë×é¼şÇøÓò");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("é¼ æ ‡ç¦»å¼€ç»„ä»¶åŒºåŸŸ");
+		System.out.println("Êó±êÀë¿ª×é¼şÇøÓò");
 	}
 }
