@@ -11,7 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-// ´°¿ÚÀà£¬¸ºÔğÏÔÊ¾ÅÆ¾Ö
+// çª—å£ç±»ï¼Œè´Ÿè´£æ˜¾ç¤ºç‰Œå±€
 public class Window extends JFrame implements ActionListener {
 
 	/**
@@ -19,10 +19,10 @@ public class Window extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel = new JPanel();
-	JMenuItem start, exit, about; // ²Ëµ¥°´Å¥
+	JMenuItem start, exit, about; // èœå•æŒ‰é’®
 
 	public Window() {
-		// ³õÊ¼»¯´°¿Ú
+		// åˆå§‹åŒ–çª—å£
 		this.setTitle("Uno!");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(930, 620);
@@ -37,15 +37,15 @@ public class Window extends JFrame implements ActionListener {
 		panel.setLayout(null);
 
 //		JLabel userLabel = new JLabel(new ImageIcon("images/y0_.png"));
-		Card userCard = new Card("y0_", true);
+		Card userCard = new Card("y0", true);
 		userCard.setBounds(100, 100, 100, 155);
 		panel.add(userCard);
 
-		Card userCard1 = new Card("g0_", true);
+		Card userCard1 = new Card("g0", true);
 		userCard1.setBounds(130, 100, 100, 155);
 		panel.add(userCard1);
 
-//		JButton loginButton = new JButton("Ò»¸ö°´Å¥");
+//		JButton loginButton = new JButton("ä¸€ä¸ªæŒ‰é’®");
 //		loginButton.setBounds(0, 100, 100, 25);
 //
 //		// ......
@@ -57,12 +57,12 @@ public class Window extends JFrame implements ActionListener {
 		panel.add(card);
 	}
 
-	// ½øĞĞÒ»¸öÅÆµÄÒÆ
+	// è¿›è¡Œä¸€ä¸ªç‰Œçš„ç§»
 	public static void move(Card card, Point from, Point to, int t) {
 		if (to.x != from.x) {
 			double k = (1.0) * (to.y - from.y) / (to.x - from.x);
 			double b = to.y - to.x * k;
-			int flag = 0;// ÅĞ¶ÏÏò×ó»¹ÊÇÏòÓÒÒÆ¶¯²½·ù
+			int flag = 0;// åˆ¤æ–­å‘å·¦è¿˜æ˜¯å‘å³ç§»åŠ¨æ­¥å¹…
 			if (from.x < to.x) {
 				if (t % 3 == 2) {
 					flag = 3;
@@ -77,38 +77,38 @@ public class Window extends JFrame implements ActionListener {
 				}
 			}
 			for (int i = from.x; Math.abs(i - to.x) > 20; i += flag) {
-				double y = k * i + b;// ÕâÀïÖ÷ÒªÓÃµÄÊıÑ§ÖĞµÄÏßĞÔº¯Êı
+				double y = k * i + b;// è¿™é‡Œä¸»è¦ç”¨çš„æ•°å­¦ä¸­çš„çº¿æ€§å‡½æ•°
 				System.out.println(y + "=" + k + "*" + i + "+" + b);
 				card.setLocation(i, (int) y);
 
 				try {
-					Thread.sleep(20); // ÑÓ³Ù£¬¿É×Ô¼ºÉèÖÃ
+					Thread.sleep(20); // å»¶è¿Ÿï¼Œå¯è‡ªå·±è®¾ç½®
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		// Î»ÖÃĞ£×¼
+		// ä½ç½®æ ¡å‡†
 		card.setLocation(to);
 	}
 
-	// ¸ù¾İÅÆÊıÖØÖÃÊÖÅÆÎ»ÖÃ
+	// æ ¹æ®ç‰Œæ•°é‡ç½®æ‰‹ç‰Œä½ç½®
 	public static void rePosition(List<Card> list, int flag) {
 		Point new_p = new Point();
 		if (flag == 0) {
-			// Íæ¼Ò0 - ±¾Íæ¼Ò - ÏÂ
+			// ç©å®¶0 - æœ¬ç©å®¶ - ä¸‹
 			new_p.x = (800 / 2) - (list.size() + 1) * 30 / 2;
 			new_p.y = 450;
 		} else if (flag == 1) {
-			// Íæ¼Ò1 - ×ó
+			// ç©å®¶1 - å·¦
 			new_p.x = 50;
 			new_p.y = (450 / 2) - (list.size() + 1) * 15 / 2;
 		} else if (flag == 2) {
-			// Íæ¼Ò2 - ÉÏ
+			// ç©å®¶2 - ä¸Š
 			new_p.x = (800 / 2) - (list.size() + 1) * 30 / 2;
 			new_p.y = 150;
 		} else if (flag == 3) {
-			// Íæ¼Ò3 - ÓÒ
+			// ç©å®¶3 - å³
 			new_p.x = 700;
 			new_p.y = (450 / 2) - (list.size() + 1) * 15 / 2;
 		}
@@ -124,15 +124,15 @@ public class Window extends JFrame implements ActionListener {
 		}
 	}
 
-	// ´´½¨²Ëµ¥ ¹¦ÄÜ°´Å¥
+	// åˆ›å»ºèœå• åŠŸèƒ½æŒ‰é’®
 	public void SetMenu() {
 		JMenuBar jMenuBar = new JMenuBar();
-		JMenu game = new JMenu("ÓÎÏ·");
-		JMenu help = new JMenu("°ïÖú");
+		JMenu game = new JMenu("æ¸¸æˆ");
+		JMenu help = new JMenu("å¸®åŠ©");
 
-		start = new JMenuItem("ĞÂÓÎÏ·");
-		exit = new JMenuItem("ÍË³ö");
-		about = new JMenuItem("¹ØÓÚ");
+		start = new JMenuItem("æ–°æ¸¸æˆ");
+		exit = new JMenuItem("é€€å‡º");
+		about = new JMenuItem("å…³äº");
 
 		start.addActionListener(this);
 		exit.addActionListener(this);

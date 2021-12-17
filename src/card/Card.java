@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-// ¿¨ÅÆ¹ÜÀíÀà
+// å¡ç‰Œç®¡ç†ç±»
 public class Card extends JLabel implements MouseListener {
 	/**
 	 * 
@@ -56,30 +56,30 @@ public class Card extends JLabel implements MouseListener {
 			clicked = !clicked;
 			Window.move(this, from, new Point(from.x, from.y - step), 10);
 		}
-		System.out.println("Êó±êµã»÷");
+		System.out.println("é¼ æ ‡ç‚¹å‡»");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Êó±ê°´ÏÂ");
+		System.out.println("é¼ æ ‡æŒ‰ä¸‹");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Êó±êËÉ¿ª");
+		System.out.println("é¼ æ ‡æ¾å¼€");
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Êó±ê½øÈë×é¼şÇøÓò");
+		System.out.println("é¼ æ ‡è¿›å…¥ç»„ä»¶åŒºåŸŸ");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Êó±êÀë¿ª×é¼şÇøÓò");
+		System.out.println("é¼ æ ‡ç¦»å¼€ç»„ä»¶åŒºåŸŸ");
 	}
 }
