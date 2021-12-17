@@ -64,7 +64,10 @@ public class Card extends JLabel implements MouseListener {
 				step = 30;
 			}
 			System.out.println("Currently click on:" + this.name);
-			Play();
+			if(e.getClickCount() == 2)
+			{
+				System.out.println("ko no card da!   " + this.name);
+			}
 			clicked = !clicked;
 			Window.move(this, from, new Point(from.x, from.y - step), 10);
 		}
@@ -87,11 +90,15 @@ public class Card extends JLabel implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("鼠标进入组件区域");
+		Point from = this.getLocation();
+			Window.move(this, from, new Point(from.x, from.y - 30), 10);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("鼠标离开组件区域");
+		Point from = this.getLocation();
+			Window.move(this, from, new Point(from.x, from.y + 30), 10);
 	}
 }

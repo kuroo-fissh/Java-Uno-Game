@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,6 +22,8 @@ public class Window extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel = new JPanel();
+	JPanel Cardpanel = new JPanel();
+	
 	JMenuItem start, exit, about; // ��������
 
 	public Window() {
@@ -55,8 +58,16 @@ public class Window extends JFrame implements ActionListener {
 	}
 
 	public void addCard(Card card, int tmp) {
-		card.setBounds(200 + tmp * 30, 300, 100, 155);
+		card.setBounds(200 - tmp * 30, 300, 100, 155);
 		panel.add(card);
+	}
+
+	public void Play(Card card)
+	{
+		System.out.println("In play");
+		JButton button = new JButton("Kono CARD da!");
+		button.setBounds(500,400,100,100);
+		panel.add(button);
 	}
 
 	// 杩�琛�涓�涓�����绉�
