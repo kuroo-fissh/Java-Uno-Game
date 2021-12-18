@@ -5,30 +5,35 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-// 卡牌管理类
+// manage cards
 public class Card extends JLabel implements MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	String name;
+	int color;
+	int number;
+	int draw2;
+	int skip;
+	int change;
 	boolean faceup;
-	boolean click_en = true;
+	boolean enter_en = false;
+	boolean click_en = false;
 	boolean clicked = false;
 
 	public Card(String name, boolean faceup) {
 		this.name = name;
 		this.faceup = faceup;
+		this.clicked = false;
 		if (this.faceup)
 			this.turntoTop();
 		else {
 			this.turntoBottom();
 		}
-		// this.setSize(220, 340);
+		this.setSize(100, 155);
 		this.setVisible(true);
 		this.addMouseListener(this);
 	}
@@ -39,66 +44,64 @@ public class Card extends JLabel implements MouseListener {
 	}
 
 	public void turntoBottom() {
-		this.setIcon(new ImageIcon("images/" + name + ".png"));
+		this.setIcon(new ImageIcon("images/back.png"));
 		this.faceup = false;
 	}
 
-	public void Play()
-	{
-		System.out.println("In play");
-		JPanel panel = new JPanel();
-		JButton button = new JButton("Kono CARD da!");
-		button.setBounds(500,400,100,100);
-		panel.add(button);
+	public void closeTouch() {
+		enter_en = false;
+		click_en = false;
+	}
+
+	public void openTouch() {
+		enter_en = true;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (click_en) {
-			Point from = this.getLocation();
-			int step;
-			if (clicked)
-				step = -30;
-			else {
-				step = 30;
-			}
+		if (click_en && e.getClickCount() == 2) {
 			System.out.println("Currently click on:" + this.name);
-			if(e.getClickCount() == 2)
-			{
-				System.out.println("ko no card da!   " + this.name);
-			}
-			clicked = !clicked;
-			Window.move(this, from, new Point(from.x, from.y - step), 10);
+			System.out.println("ko no card da!   " + this.name);
+			// Point from = this.getLocation();
+			// Window.move(this, from, new Point(from.x + 200, from.y + 60), 10);
+			clicked = true;
 		}
-		System.out.println("鼠标点击");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("鼠标按下");
+		System.out.println("mouse pressed");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("鼠标松开");
+		System.out.println("mouse released");
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("鼠标进入组件区域");
-		Point from = this.getLocation();
+		if (enter_en) {
+			click_en = true;
+			System.out.println("mouse entered");
+			Point from = this.getLocation();
 			Window.move(this, from, new Point(from.x, from.y - 30), 10);
+		}
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("鼠标离开组件区域");
-		Point from = this.getLocation();
+		if (enter_en) {
+			click_en = false;
+			System.out.println("mouse exited");
+			Point from = this.getLocation();
 			Window.move(this, from, new Point(from.x, from.y + 30), 10);
+		}
+
 	}
 }
