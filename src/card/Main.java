@@ -36,11 +36,15 @@ public class Main {
 				window.repaint();
 				System.out.println("init:");
 				while (true) {
-					player[0].openTouch();
-					card = player[0].playCard();
-					System.out.println("playcard:" + card.name);
-					window.playCardPos(card);
-					window.rePosition(player[0].playerCardList, 0);
+					for (int i = 0; i < 4; i++) {
+						player[i].openTouch();
+						card = player[i].playCard();
+						System.out.println("playcard:" + card.name);
+						player[i].closeTouch();
+						window.playCardPos(card);
+						window.rePosition(player[i].playerCardList, i);
+					}
+
 				}
 			} else {
 				System.out.println("false");

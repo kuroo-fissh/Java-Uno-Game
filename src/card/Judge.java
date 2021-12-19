@@ -97,12 +97,12 @@ public class Judge {
 		// wild cards
 		for (int i = 0; i < 4; i++) {
 			card = new Card("wild", false);
-			card.setLocation(300 + (i * 20), init_height);
+			card.setLocation(init_width + (i * 20), init_height);
 			judgeCardList.add(card);
 		}
 		for (int i = 0; i < 4; i++) {
 			card = new Card("wild4", false);
-			card.setLocation(300 + (i * 20), init_height);
+			card.setLocation(init_width + (i * 20), init_height);
 			judgeCardList.add(card);
 		}
 	}

@@ -26,6 +26,12 @@ public class Player {
 		}
 	}
 
+	public void closeTouch() {
+		for (int i = 0; i < playerCardList.size(); i++) {
+			playerCardList.get(i).closeTouch();
+		}
+	}
+
 	public Card playCard() {
 		Card card = null;
 		while (true) {
