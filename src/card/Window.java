@@ -5,12 +5,14 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 // maintain a window
@@ -72,7 +74,7 @@ public class Window extends JFrame implements ActionListener {
 
 	public void playCardPos(Card card) {
 		Point play_positon = new Point();
-		play_positon.x = width / 2 + 100;
+		play_positon.x = width / 2 + 150;
 		play_positon.y = height / 2 - 100;
 		move(card, card.getLocation(), play_positon, 3);
 	}
@@ -105,24 +107,24 @@ public class Window extends JFrame implements ActionListener {
 
 	// when the number of cards changed, reposition them
 	public void rePosition(List<Card> list, int flag) {
-		int layer = 0;
+		Collections.sort(list);
 		Point new_p = new Point();
 		if (flag == 0) {
 			// bottom
-			new_p.x = (width / 2) + (list.size() - 1) * 40 / 2 - 100 / 2;
+			new_p.x = (width / 2) - (list.size() - 1) * 40 / 2 - 100 / 2;
 			new_p.y = height - 250;
 		} else if (flag == 1) {
 			// left
 			new_p.x = 100;
-			new_p.y = (height / 2) + (list.size() - 1) * 30 / 2 - 155 / 2;
+			new_p.y = (height / 2) - (list.size() - 1) * 30 / 2 - 155 / 2;
 		} else if (flag == 2) {
 			// top
-			new_p.x = (width / 2) + (list.size() - 1) * 40 / 2 - 100 / 2;
+			new_p.x = (width / 2) - (list.size() - 1) * 40 / 2 - 100 / 2;
 			new_p.y = 50;
 		} else if (flag == 3) {
 			// right
 			new_p.x = width - 200;
-			new_p.y = (height / 2) + (list.size() - 1) * 30 / 2 - 155 / 2;
+			new_p.y = (height / 2) - (list.size() - 1) * 30 / 2 - 155 / 2;
 		}
 		int len = list.size();
 		int speed;
@@ -134,11 +136,11 @@ public class Window extends JFrame implements ActionListener {
 		for (int i = 0; i < len; i++) {
 			Card card = list.get(i);
 			Window.move(card, card.getLocation(), new_p, speed);
-			panel.setComponentZOrder(card, layer++);
+			panel.setComponentZOrder(card, 0);
 			if (flag == 0 || flag == 2)
-				new_p.x -= 40;
+				new_p.x += 40;
 			else
-				new_p.y -= 30;
+				new_p.y += 30;
 		}
 	}
 
@@ -193,6 +195,12 @@ public class Window extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	// Win
+	public void alertWin(int num) {
+		JOptionPane.showMessageDialog(new JPanel(), "Player " + num + " wins the game!", "Uno",
+				JOptionPane.DEFAULT_OPTION);
 	}
 
 }

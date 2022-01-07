@@ -16,7 +16,8 @@ public class Player {
 		playerCardList.removeAll(playerCardList);
 	}
 
-	public void drawCard(Card card) {
+	public void insertCard(Card card) {
+		cardNum++;
 		playerCardList.add(card);
 	}
 
@@ -32,29 +33,36 @@ public class Player {
 		}
 	}
 
-	public Card playCard() {
-		Card card = null;
-		while (true) {
-			for (int i = 0; i < playerCardList.size(); i++) {
-				try {
-					Thread.sleep(30);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				// System.out.println("card:" + playerCardList.get(i).name);
-				if (playerCardList.get(i).clicked) {
-					card = playerCardList.get(i);
-					break;
-				}
-			}
-			if (card != null)
-				break;
-		}
-		card.clicked = false;
+	public void removeCard(Card card) {
 		card.closeTouch();
+		cardNum--;
 		playerCardList.remove(card);
+	}
+
+	public Card playCardDetect() {
+		Card card = null;
+		for (int i = 0; i < playerCardList.size(); i++) {
+			if (playerCardList.get(i).clicked) {
+				card = playerCardList.get(i);
+				break;
+			}
+		}
+		if (card != null)
+			card.clicked = false;
 		return card;
+	}
+
+	public void turnCardsToTop() {
+		for (int i = 0; i < this.playerCardList.size(); i++) {
+			this.playerCardList.get(i).turntoTop();
+		}
+	}
+
+	public void turnCardsToBottom() {
+		for (int i = 0; i < this.playerCardList.size(); i++) {
+			this.playerCardList.get(i).turntoBottom();
+			;
+		}
 	}
 
 }
